@@ -1,9 +1,10 @@
 {% set component_name = "cmake" %}
 {% set repo_name = "gz-" + component_name %}
-{% set base_name = "lib" + repo_name %}
 {% set version = "3.0.0" %}
 {% set major_version = version.split('.')[0] %}
-{% set name = base_name + major_version %}
+{% set name = repo_name + major_version %}
+{% set component_version = component_name + major_version %}
+{% set cxx_name = "lib" + name %}
 
 package:
   name: {{ name }}
@@ -14,30 +15,45 @@ source:
     sha256: 01edf6b20c0f2f76dc48c3fa48bfeb4e82dd60186b82c0b34e38f7e1f53f21ac
 
 build:
-  number: 0
-  run_exports:
-    - {{ pin_subpackage(name, max_pin='x') }}
+  number: 1
 
-requirements:
-  build:
-    - {{ compiler('cxx') }}
-    - {{ compiler('c') }}
-    - cmake
-    - ninja
-    - pkgconfig
+outputs:
+  - name: {{ cxx_name }}
+    script: build.sh  # [unix]
+    script: bld.bat  # [win]
+    build:
+      run_exports:
+        - {{ pin_subpackage(cxx_name, max_pin='x') }}
+    requirements:
+      build:
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
+        - cmake
+        - pkg-config
+        - ninja
+    test:
+      commands:
+        - test -f ${PREFIX}/lib/cmake/{{ name }}/{{ name }}-config.cmake  # [not win]
+        - if exist %PREFIX%\\Library\\lib\\cmake\\{{ name }}\\{{ name }}-config.cmake exit 1  # [win]
 
-test:
-  commands:
-    - test -f ${PREFIX}/share/cmake/{{ repo_name }}{{ major_version }}/{{ repo_name }}{{ major_version }}-config.cmake  # [not win]
-    - if not exist %PREFIX%\\Library\\share\\cmake\\{{ repo_name }}{{ major_version }}\\{{ repo_name }}{{ major_version }}-config.cmake exit 1  # [win]
+  - name: {{ name }}
+    build:
+      run_exports:
+        - {{ pin_subpackage(cxx_name, max_pin='x') }}
+    requirements:
+      run:
+        - {{ pin_subpackage(cxx_name, exact=True) }}
+
 
 about:
-  home: https://github.com/gazebosim/gz-cmake/
+  home: https://github.com/gazebosim/gz-cmake
   license: Apache-2.0
   license_file: LICENSE
   summary: 'A set of CMake modules that are used by the C++-based Gazebo projects.'
 
 extra:
-  feedstock-name: {{ repo_name }}
   recipe-maintainers:
+    - wolfv
     - traversaro
+    - j-rivero
+
