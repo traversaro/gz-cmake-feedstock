@@ -43,7 +43,10 @@ outputs:
     requirements:
       run:
         - {{ pin_subpackage(cxx_name, exact=True) }}
-
+    test:
+      commands:
+        - test -f ${PREFIX}/lib/cmake/{{ name }}/{{ name }}-config.cmake  # [not win]
+        - if exist %PREFIX%\\Library\\lib\\cmake\\{{ name }}\\{{ name }}-config.cmake exit 1  # [win]
 
 about:
   home: https://github.com/gazebosim/gz-cmake
@@ -56,4 +59,3 @@ extra:
     - wolfv
     - traversaro
     - j-rivero
-
