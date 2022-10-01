@@ -19,8 +19,8 @@ build:
 
 outputs:
   - name: {{ cxx_name }}
-    script: build.sh  # [unix]
-    script: bld.bat  # [win]
+    script: build_cxx.sh  # [unix]
+    script: bld_cxx.bat  # [win]
     build:
       run_exports:
         - {{ pin_subpackage(cxx_name, max_pin='x') }}
