@@ -33,8 +33,8 @@ outputs:
         - ninja
     test:
       commands:
-        - test -f ${PREFIX}/lib/cmake/{{ name }}/{{ name }}-config.cmake  # [not win]
-        - if not exist %PREFIX%\\Library\\lib\\cmake\\{{ name }}\\{{ name }}-config.cmake exit 1  # [win]
+        - test -f ${PREFIX}/share/cmake/{{ name }}/{{ name }}-config.cmake  # [not win]
+        - if not exist %PREFIX%\\Library\\share\\cmake\\{{ name }}\\{{ name }}-config.cmake exit 1  # [win]
 
   - name: {{ name }}
     build:
