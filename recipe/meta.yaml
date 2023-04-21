@@ -1,6 +1,6 @@
 {% set component_name = "cmake" %}
 {% set repo_name = "gz-" + component_name %}
-{% set version = "3.0.1" %}
+{% set version = "3.1.0" %}
 {% set major_version = version.split('.')[0] %}
 {% set name = repo_name + major_version %}
 {% set component_version = component_name + major_version %}
@@ -12,7 +12,7 @@ package:
 
 source:
   - url: https://github.com/gazebosim/{{ repo_name }}/archive/{{ repo_name }}{{ major_version }}_{{ version }}.tar.gz
-    sha256: d211e1a5384b33968a0b755dd6bded512f3e2957d2f04766ec17b0b5114201a0
+    sha256: 4738635ebc6533117fd23e3fe2c6d887dcf3af572d9708945f21257457326e9a
 
 build:
   number: 0
