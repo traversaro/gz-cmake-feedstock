@@ -1,11 +1,11 @@
-About gz-cmake3
-===============
+About gz-cmake3-feedstock
+=========================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/gz-cmake-feedstock/blob/main/LICENSE.txt)
 
 Home: https://github.com/gazebosim/gz-cmake
 
 Package license: Apache-2.0
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/gz-cmake-feedstock/blob/main/LICENSE.txt)
 
 Summary: A set of CMake modules that are used by the C++-based Gazebo projects.
 
