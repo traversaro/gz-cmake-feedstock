@@ -1,6 +1,6 @@
 {% set component_name = "cmake" %}
 {% set repo_name = "gz-" + component_name %}
-{% set version = "3.0.1" %}
+{% set version = "3.1.0" %}
 {% set major_version = version.split('.')[0] %}
 {% set name = repo_name + major_version %}
 {% set component_version = component_name + major_version %}
@@ -12,7 +12,7 @@ package:
 
 source:
   - url: https://github.com/gazebosim/{{ repo_name }}/archive/{{ repo_name }}{{ major_version }}_{{ version }}.tar.gz
-    sha256: d211e1a5384b33968a0b755dd6bded512f3e2957d2f04766ec17b0b5114201a0
+    sha256: 4738635ebc6533117fd23e3fe2c6d887dcf3af572d9708945f21257457326e9a
 
 build:
   number: 0
@@ -24,6 +24,10 @@ outputs:
     build:
       run_exports:
         - {{ pin_subpackage(cxx_name, max_pin='x') }}
+      # dlfcn-win32 is used only for tests, we can 
+      # safely ignore its run_exports
+      ignore_run_exports:
+        - dlfcn-win32  # [win]
     requirements:
       build:
         - {{ compiler('c') }}
@@ -31,6 +35,10 @@ outputs:
         - cmake
         - pkg-config
         - ninja
+      host:
+        # This is just a test-only dependency,
+        # see https://github.com/gazebosim/gz-cmake/pull/334#issuecomment-1519115200
+        - dlfcn-win32  # [win]
     test:
       commands:
         - test -f ${PREFIX}/share/cmake/{{ name }}/{{ name }}-config.cmake  # [not win]
