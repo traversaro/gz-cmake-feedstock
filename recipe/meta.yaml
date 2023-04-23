@@ -24,6 +24,10 @@ outputs:
     build:
       run_exports:
         - {{ pin_subpackage(cxx_name, max_pin='x') }}
+      # dlfcn-win32 is used only for tests, we can 
+      # safely ignore its run_exports
+      ignore_run_exports:
+        - dlfcn-win32  # [win]
     requirements:
       build:
         - {{ compiler('c') }}
@@ -31,6 +35,10 @@ outputs:
         - cmake
         - pkg-config
         - ninja
+      host:
+        # This is just a test-only dependency,
+        # see https://github.com/gazebosim/gz-cmake/pull/334#issuecomment-1519115200
+        - dlfcn-win32  # [win]
     test:
       commands:
         - test -f ${PREFIX}/share/cmake/{{ name }}/{{ name }}-config.cmake  # [not win]
