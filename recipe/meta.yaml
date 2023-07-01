@@ -14,10 +14,10 @@ source:
   - url: https://github.com/gazebosim/{{ repo_name }}/archive/{{ repo_name }}{{ major_version }}_{{ version }}.tar.gz
     sha256: fc51e0990e4d7ae015d01160f51155fa69f247bc3de207bcc534b40bfb506f01
     patches:
-      - 357.patch
+      - fixfindogrenextcondaforge.patch
 
 build:
-  number: 0
+  number: 1
 
 outputs:
   - name: {{ cxx_name }}
