@@ -15,6 +15,7 @@ source:
     sha256: fc51e0990e4d7ae015d01160f51155fa69f247bc3de207bcc534b40bfb506f01
     patches:
       - 357.patch
+      - fixogre2respathconda.patch 
 
 build:
   number: 0
