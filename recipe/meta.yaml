@@ -16,9 +16,10 @@ source:
     patches:
       - 357.patch
       - fixogre2respathconda.patch 
+      - fixfindogrenextcondaforge.patch
 
 build:
-  number: 0
+  number: 2
 
 outputs:
   - name: {{ cxx_name }}
