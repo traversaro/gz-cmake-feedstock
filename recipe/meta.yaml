@@ -1,6 +1,6 @@
 {% set component_name = "cmake" %}
 {% set repo_name = "gz-" + component_name %}
-{% set version = "3.3.0" %}
+{% set version = "3.3.1" %}
 {% set major_version = version.split('.')[0] %}
 {% set name = repo_name + major_version %}
 {% set component_version = component_name + major_version %}
@@ -12,7 +12,7 @@ package:
 
 source:
   - url: https://github.com/gazebosim/{{ repo_name }}/archive/{{ repo_name }}{{ major_version }}_{{ version }}.tar.gz
-    sha256: 99c9504994fa186fb86a0e15aaffa9f1f5164a197ff343657c76d551381999ba
+    sha256: 5fdccb98e58dad23fcebd3ca66e43940901e3d1605132c02661db5982e55f965
     patches:
       - fixogre2respathconda.patch
       - fixfindogrenextcondaforge.patch
